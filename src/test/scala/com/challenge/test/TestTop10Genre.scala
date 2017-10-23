@@ -57,7 +57,7 @@ class TestTop10Genre extends FunSuite with PerSparkContext {
     // explode table by genre using the genre array
     val explodAnime: Dataset[AnimeCount] = anime_count
       .flatMap(a => a.genre.split(",")
-        .map(g => AnimeCount(a.anime_id,a.name, g,a.Type,a.episodes,a.rating,a.members,a.count)))
+        .map(g => AnimeCount(a.anime_id,a.name, g.trim,a.Type,a.episodes,a.rating,a.members,a.count)))
       .as[AnimeCount]
 
     // sum the counts base on the genre
